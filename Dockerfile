@@ -19,6 +19,3 @@ RUN apt-get update \
     && cd - \
     && apt-get purge -y --auto-remove build-essential postgresql-server-dev-16 libpq-dev wget git \
     && rm -rf /tmp/pgvector
-
-# Copy initialization scripts
-COPY ./docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
