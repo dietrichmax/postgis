@@ -21,4 +21,4 @@ RUN apt-get update \
     && rm -rf /tmp/pgvector
 
 # Copy initialization scripts
-#COPY ./docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
+COPY ./docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
