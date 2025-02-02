@@ -11,7 +11,7 @@ RUN apt-get update \
        postgresql-server-dev-16 \
     # Clean up to reduce layer size
     && rm -rf /var/lib/apt/lists/* \
-    && git clone https://github.com/pgvector/pgvector.git /tmp/pgvector \
+    && git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git /tmp/pgvector \
     && cd /tmp/pgvector \
     && make \
     && make install \
