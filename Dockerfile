@@ -8,7 +8,7 @@ RUN apt-get update \
        libpq-dev \
        wget \
        git \
-       postgresql-server-dev-17 \
+       postgresql-server-dev-16 \
     # Clean up to reduce layer size
     && rm -rf /var/lib/apt/lists/* \
     && git clone https://github.com/pgvector/pgvector.git /tmp/pgvector \
@@ -17,7 +17,7 @@ RUN apt-get update \
     && make install \
     # Clean up unnecessary files
     && cd - \
-    && apt-get purge -y --auto-remove build-essential postgresql-server-dev-17 libpq-dev wget git \
+    && apt-get purge -y --auto-remove build-essential postgresql-server-dev-16 libpq-dev wget git \
     && rm -rf /tmp/pgvector
 
 # Copy initialization scripts
