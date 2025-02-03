@@ -1,21 +1,13 @@
 # Use the PostGIS image as the base
+FROM tensorchord/pgvecto-rs-binary:16-v0.2.1 as binary
+
 FROM postgis/postgis:16-3.5
 
-# Install necessary packages
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       build-essential \
-       libpq-dev \
-       wget \
-       git \
-       postgresql-server-dev-16 \
-    # Clean up to reduce layer size
-    && rm -rf /var/lib/apt/lists/* \
-    && git clone --branch v0.8.0 https://github.com/pgvector/pgvector.git /tmp/pgvector \
-    && cd /tmp/pgvector \
-    && make \
-    && make install \
-    # Clean up unnecessary files
-    && cd - \
-    && apt-get purge -y --auto-remove build-essential postgresql-server-dev-16 libpq-dev wget git \
-    && rm -rf /tmp/pgvector
+COPY --from=binary /pgvecto-rs-binary-release.deb /tmp/vectors.deb
+RUN apt-get install -y /tmp/vectors.deb && rm -f /tmp/vectors.deb
+
+# Change the uid of postgres to 26
+RUN usermod -u 26 postgres
+USER 26
+
+CMD ["postgres", "-c" ,"shared_preload_libraries=vectors.so", "-c", "search_path=\"$user\", public, vectors", "-c", "logging_collector=on"]
