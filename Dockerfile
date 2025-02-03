@@ -1,6 +1,6 @@
 FROM scratch as nothing
 ARG TARGETARCH
-FROM tensorchord/pgvecto-rs-binary:16-0.30 as binary
+FROM tensorchord/pgvecto-rs-binary:16-0.3.0 as binary
 
 FROM postgres:16-bullseye
 COPY --from=binary /pgvecto-rs-binary-release.deb /tmp/vectors.deb
