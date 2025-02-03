@@ -1,5 +1,5 @@
 # Use the PostGIS image as the base
-FROM tensorchord/pgvecto-rs-binary:16-v0.2.1 as binary
+FROM tensorchord/pgvecto-rs:pg16-v0.4.0 as binary
 
 FROM postgis/postgis:16-3.5
 
