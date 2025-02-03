@@ -1,5 +1,3 @@
-FROM tensorchord/pgvecto-rs-binary:v0.3.0 as binary
-
 FROM postgres:16-bullseye
 
 ENV POSTGIS_MAJOR 3
@@ -15,9 +13,3 @@ RUN apt-get update \
            postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
            postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts \
       && rm -rf /var/lib/apt/lists/*
-
-COPY --from=binary /pgvecto-rs-binary-release.deb /tmp/vectors.deb
-RUN apt-get install -y /tmp/vectors.deb && rm -f /tmp/vectors.deb
-#RUN mkdir -p /docker-entrypoint-initdb.d
-#COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
-#COPY ./update-postgis.sh /usr/local/bin
