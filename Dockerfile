@@ -2,8 +2,6 @@ FROM postgres:16-bullseye
 
 ENV POSTGIS_MAJOR 3
 ENV POSTGIS_VERSION 3.5.2+dfsg-1.pgdg110+1
-ENV PGVECTORS_VERSION v0.3.0
-
 
 RUN apt-get update \
       && apt-cache showpkg postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
@@ -17,6 +15,6 @@ RUN apt-get update \
       && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/tensorchord/pgvecto.rs/releases/download/v0.3.0/vectors-pg16_0.3.0_amd64.deb -P /tmp/
-COPY vectors-pg16_0.3.0_amd64.deb /tmp/vectors.deb
+COPY /tmp/vectors-pg16_0.3.0_amd64.deb /tmp/vectors.deb
 RUN apt-get install -y /tmp/vectors.deb && rm -f /tmp/vectors.deb
 
