@@ -16,7 +16,7 @@ RUN apt-get update \
            postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts \
       && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/tensorchord/pgvecto.rs/releases/download/v$PGVECTORS_VERSION/vectors-pg16_$PGVECTORS_VERSION_amd64.deb -P /tmp/
-COPY vectors-pg16_$PGVECTORS_VERSION_amd64.deb /tmp/vectors.deb
+RUN wget https://github.com/tensorchord/pgvecto.rs/releases/download/v0.3.0/vectors-pg16_0.3.0_amd64.deb -P /tmp/
+COPY vectors-pg16_0.3.0_amd64.deb /tmp/vectors.deb
 RUN apt-get install -y /tmp/vectors.deb && rm -f /tmp/vectors.deb
 
